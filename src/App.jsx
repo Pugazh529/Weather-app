@@ -30,21 +30,26 @@ function App() {
       <h1 className='text-center'>Weather Details</h1>
       <div className='weather-page vh-100'>
         <div className="mb-4 cards p-5 bg-primary">
-    
+
           <input type="email" className="form-control" placeholder='Enter City/Country etc..' onChange={(e) => setSearch(e.target.value)} id="Search" aria-describedby="" />
 
           <div className="fetch my-4 d-flex justify-content-center ">
             <button className='btn btn-danger' onClick={() => getweather()}>Fetch</button>
           </div>
-          {weather ?
-            <div className='text-center '>
-              <h3>{weather.name}, {weather.sys.country}</h3>
-              <h4>{weather.main.temp}°C</h4>
-              <p>{weather.weather[0].main}</p>
-              <p>{weather.weather[0].description}</p>
-            </div>
-            : <p>Wating</p>
-          }
+          {weather ? (
+            Number(weather.cod) === 404 ? (
+              <div>Kindly recheck the City / Name </div>
+            ) : (
+              <div className='text-center '>
+                <h3>{weather.name}, {weather.sys.country}</h3>
+                <h4>{weather.main.temp}°C</h4>
+                <p>{weather.weather[0].main}</p>
+                <p>{weather.weather[0].description}</p>
+              </div>
+            )
+          ) : (<p>Wating....</p>
+          )}
+
         </div>
       </div>
     </div>
